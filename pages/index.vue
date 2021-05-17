@@ -1,32 +1,41 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">dept-fe</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
+  <div class="p-5 flex flex-col space-y-2">
+    <div v-for="client in clients" :key="client.email" class="">
+      <NuxtLink :to="`details/${client.id.value}`">
+        <div
+          class="
+            border border-gray-300
+            rounded-xl
+            h-32
+            flex
+            overflow-hidden
+            shadow-md
+          "
         >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+          <VImage img="rainbow" class="w-2/5"></VImage>
+          <div class="p-5">
+            <p>{{ client.name.title }} {{ client.name.first }}</p>
+            <p>{{ client.name.last }}</p>
+          </div>
+        </div>
+      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import VImage from '@/components/VImage'
+export default {
+  components: VImage,
+  computed: {
+    clients() {
+      return this.$store.getters['clients/getAll']
+    },
+  },
+  async mounted() {
+    await this.$store.dispatch('clients/fetchAll')
+  },
+}
 </script>
 
 <style>
@@ -38,10 +47,10 @@ export default {}
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: center; */
 }
 
 .title {
