@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 flex flex-col space-y-2">
+  <div class="p-5 flex flex-col space-y-6">
     <div v-for="client in clients" :key="client.email" class="">
       <NuxtLink :to="`details/${client.id.value}`">
         <div

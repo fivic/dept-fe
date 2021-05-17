@@ -6,16 +6,20 @@
         <VImage img="rainbow" md></VImage>
         <p class="font-bold">{{ getName }}</p>
         <div class="mt-2">
-          <p>Date of birth: {{ client.dob.date }}</p>
           <p>
-            Place of residence:
+            <span class="font-semibold">Date of birth</span>:
+            {{ client.dob.date }}
+          </p>
+          <p>
+            <span class="font-semibold">Place of residence</span>:
             {{ client.location.city + ', ' + client.location.country }}
           </p>
           <p>
-            E-mail: <a :href="`mailto:${client.email}`">{{ client.email }}</a>
+            <span class="font-semibold">E-mail</span>:
+            <a :href="`mailto:${client.email}`">{{ client.email }}</a>
           </p>
           <p>
-            Phone number:
+            <span class="font-semibold">Phone number</span>:
             <a :href="`tel:${client.phone}`">{{ client.phone }}</a>
           </p>
         </div>
