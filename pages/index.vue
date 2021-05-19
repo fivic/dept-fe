@@ -12,8 +12,9 @@
             shadow-md
           "
         >
-          <VImage img="rainbow" class="w-2/5"></VImage>
-          <div class="p-5">
+          <!-- <VImage img="rainbow" class="w-2/5"></VImage> -->
+          <img :src="client.picture.large" />
+          <div class="p-5 font-semibold text-xl">
             <p>{{ client.name.title }} {{ client.name.first }}</p>
             <p>{{ client.name.last }}</p>
           </div>
@@ -33,7 +34,10 @@ export default {
     },
   },
   async mounted() {
-    await this.$store.dispatch('clients/fetchAll')
+    if (!this.clients.length) {
+      console.log('tu smo')
+      await this.$store.dispatch('clients/fetchAll')
+    }
   },
 }
 </script>
