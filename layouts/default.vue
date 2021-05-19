@@ -1,7 +1,11 @@
 <template>
-  <div class="pt-1">
-    <VIcon wfull icon="logo"></VIcon>
-    <Nuxt />
+  <div>
+    <NuxtLink to="/"
+      ><div class="sticky top-0 border-b border-black py-4 w-full bg-white">
+        <VIcon wfull icon="logo"></VIcon>
+      </div>
+    </NuxtLink>
+    <Nuxt class="min-h-screen" />
   </div>
 </template>
 
