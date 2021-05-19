@@ -5,7 +5,7 @@
         <VIcon wfull icon="logo"></VIcon>
       </div>
     </NuxtLink>
-    <Nuxt class="min-h-screen" />
+    <Nuxt class="" />
   </div>
 </template>
 
