@@ -4,7 +4,6 @@ export const state = () => ({
 
 export const mutations = {
   setClients(state, items) {
-    console.log(items)
     state.all = items
   },
 }
@@ -21,7 +20,6 @@ export const actions = {
 
 export const getters = {
   getAll: (state) => {
-    console.log('getAll', state.all)
     return state.all
   },
 }
