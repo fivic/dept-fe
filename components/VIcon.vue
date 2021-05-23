@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center space-x-2">
     <component
       :is="svgLoader"
       :class="{
@@ -11,6 +11,7 @@
       }"
     >
     </component>
+    <slot></slot>
   </div>
 </template>
 
