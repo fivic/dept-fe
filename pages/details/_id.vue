@@ -1,41 +1,45 @@
 <template>
-  <div class="">
+  <div>
     <div class="absolute w-full"></div>
-    <div class="w-full pt-2 px-2 text-black">
+    <div class="w-full pt-2 px-2">
       <NuxtLink to="/"
-        ><VIcon
-          icon="arrow-circle-left"
-          class="fill-current text-black"
-          xl
-        ></VIcon
+        ><VIcon icon="arrow-circle-left" class="fill-current" lg></VIcon
       ></NuxtLink>
       <div
         v-if="client"
-        class="border border-gray-200 mt-24 px-4 pb-10 bg-gray-200 rounded-md"
+        class="border border-gray-200 mt-24 px-4 pb-10 bg-green-400 rounded-md"
       >
         <div class="flex flex-col items-center pb-6 -mt-24 space-y-2">
-          <img :src="client.picture.large" class="rounded-full w-48 h-48" />
+          <VImage :img-url="client.picture.large" rounded lg></VImage>
           <span class="font-bold text-2xl">{{ getName }}</span>
         </div>
 
         <div class="space-y-2 flex flex-col font-semibold">
           <div class="flex space-x-2">
-            <VIcon icon="cake"></VIcon>
-            <span>{{ client.dob.date }}</span>
+            <VIcon icon="cake" :text="client.dob.date">
+              <span class="text-green-900">{{ client.dob.date }}</span>
+            </VIcon>
           </div>
           <div class="flex space-x-2">
-            <VIcon icon="location-marker"></VIcon>
-            <span>{{
-              client.location.city + ', ' + client.location.country
-            }}</span>
+            <VIcon icon="location-marker" text="">
+              <span class="text-green-900">{{
+                client.location.city + ', ' + client.location.country
+              }}</span></VIcon
+            >
           </div>
           <div class="flex space-x-2">
-            <VIcon icon="mail"></VIcon>
-            <a :href="`mailto:${client.email}`">{{ client.email }}</a>
+            <VIcon icon="mail">
+              <a :href="`mailto:${client.email}`" class="text-green-900">{{
+                client.email
+              }}</a></VIcon
+            >
           </div>
           <div class="flex space-x-2">
-            <VIcon icon="phone"></VIcon>
-            <a :href="`tel:${client.phone}`">{{ client.phone }}</a>
+            <VIcon icon="phone">
+              <a :href="`tel:${client.phone}`" class="text-green-900">{{
+                client.phone
+              }}</a></VIcon
+            >
           </div>
         </div>
       </div>
@@ -45,9 +49,11 @@
 
 <script>
 import VIcon from '@/components/VIcon'
+import VImage from '@/components/VImage'
 export default {
   components: {
     VIcon,
+    VImage,
   },
   data() {
     return {
@@ -63,7 +69,6 @@ export default {
     this.client = await this.$store.getters['clients/getAll'].find(
       (el) => el.id.value === this.$route.params.id
     )
-    console.log('this.client', this.client)
   },
 }
 </script>

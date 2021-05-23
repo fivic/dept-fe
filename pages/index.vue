@@ -1,81 +1,85 @@
 <template>
-  <div class="p-5 flex flex-col space-y-6">
-    <div v-for="client in clients" :key="client.email" class="">
-      <NuxtLink :to="`details/${client.id.value}`">
-        <div
-          class="
-            border border-gray-300
-            rounded-xl
-            h-32
-            flex
-            overflow-hidden
-            shadow-md
-          "
-        >
-          <!-- <VImage img="rainbow" class="w-2/5"></VImage> -->
-          <img :src="client.picture.large" />
-          <div class="p-5 font-semibold text-xl">
-            <p>{{ client.name.title }} {{ client.name.first }}</p>
-            <p>{{ client.name.last }}</p>
-          </div>
-        </div>
-      </NuxtLink>
+  <div class="p-5 flex flex-col space-y-6 text-green-900 min-h-screen h-full">
+    <div class="py-2">
+      <input
+        v-model="search"
+        class="
+          p-2
+          w-full
+          border border-gray-400
+          rounded-lg
+          outline-none
+          focus:ring-1 focus:ring-green-400
+          text-lg
+          font-semibold
+        "
+        type="text"
+        placeholder="Search"
+      />
     </div>
+    <transition-group name="fade" class="space-y-6">
+      <div
+        v-for="client in filteredClients"
+        :key="client.email"
+        class="duration-300 ease-in-out"
+      >
+        <NuxtLink :to="`details/${client.id.value}`">
+          <div class="rounded-xl h-32 flex overflow-hidden shadow-lg">
+            <VImage :img-url="client.picture.large" class="w-2/5"></VImage>
+            <div class="p-5 font-semibold text-xl bg-green-400 w-3/5">
+              <p>{{ client.name.title }} {{ client.name.first }}</p>
+              <p>{{ client.name.last }}</p>
+            </div>
+          </div>
+        </NuxtLink>
+      </div></transition-group
+    >
   </div>
 </template>
 
 <script>
+import _includes from 'lodash/includes'
 import VImage from '@/components/VImage'
+
 export default {
-  components: VImage,
+  components: {
+    VImage,
+  },
+  data() {
+    return { search: '' }
+  },
   computed: {
     clients() {
       return this.$store.getters['clients/getAll']
     },
+    filteredClients() {
+      if (this.search === '' || this.search === undefined) return this.clients
+
+      const self = this
+      return this.clients.filter((item) => {
+        return (
+          _includes(
+            item.name.first.toLowerCase(),
+            self.search.toString().toLowerCase()
+          ) ||
+          _includes(
+            item.name.last.toLowerCase(),
+            self.search.toString().toLowerCase()
+          ) ||
+          _includes(
+            item.name.title.toLowerCase(),
+            self.search.toString().toLowerCase()
+          )
+        )
+      })
+    },
   },
   async mounted() {
     if (!this.clients.length) {
-      console.log('tu smo')
       await this.$store.dispatch('clients/fetchAll')
     }
   },
 }
 </script>
 
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center; */
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
+<style></style>
