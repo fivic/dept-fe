@@ -1,6 +1,6 @@
 # dept-fe
 
-## testing it out
+## Testing it out
 
 Do following to test it out
 
