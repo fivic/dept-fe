@@ -10,11 +10,24 @@ export const mutations = {
 
 export const actions = {
   async fetchAll({ commit }) {
-    const data = await this.$axios.get('https://randomuser.me/api/?results=50')
-    const cleanData = data.data.results.filter(
-      (el) => el.id.value && el.location.city
-    )
-    commit('setClients', cleanData)
+    const data = await this.$axios.get('https://randomuser.me/api/?results=300')
+    const filteredData = data.data.results
+      .filter((el) => {
+        const offsetMinutes = this.$filters.offsetToMinutes(
+          el.location.timezone.offset
+        )
+        if (
+          el.id.value &&
+          el.location.city &&
+          el.dob.age >= 18 &&
+          offsetMinutes >= -60 &&
+          offsetMinutes <= 60
+        )
+          return true
+        else return false
+      })
+      .slice(0, 14)
+    commit('setClients', filteredData)
   },
 }
 
