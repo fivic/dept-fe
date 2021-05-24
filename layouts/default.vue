@@ -1,7 +1,9 @@
 <template>
   <div>
     <NuxtLink to="/"
-      ><div class="sticky top-0 border-b border-black py-4 w-full bg-white">
+      ><div
+        class="sticky top-0 border-b border-black py-4 w-full h-14 bg-white"
+      >
         <VIcon wfull icon="logo"></VIcon>
       </div>
     </NuxtLink>

@@ -1,13 +1,26 @@
 <template>
   <div>
     <div class="absolute w-full"></div>
-    <div class="w-full pt-2 px-2">
+    <div class="w-full pt-2 px-2 flex flex-col">
       <NuxtLink to="/"
         ><VIcon icon="arrow-circle-left" class="fill-current" lg></VIcon
       ></NuxtLink>
       <div
         v-if="client"
-        class="border border-gray-200 mt-24 px-4 pb-10 bg-green-400 rounded-md"
+        class="
+          border border-gray-200
+          mt-24
+          px-4
+          pb-10
+          bg-green-400
+          rounded-md
+          w-full
+          sm:w-4/5
+          md:w-3/5
+          lg:w-2/5
+          xl:w-1/3
+          self-center
+        "
       >
         <div class="flex flex-col items-center pb-6 -mt-24 space-y-2">
           <VImage :img-url="client.picture.large" rounded lg></VImage>

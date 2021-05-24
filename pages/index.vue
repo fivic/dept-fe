@@ -1,6 +1,6 @@
 <template>
-  <div class="p-5 flex flex-col space-y-6 text-green-900 min-h-screen h-full">
-    <div class="py-2">
+  <div class="px-5 flex flex-col text-green-900 min-h-screen h-full">
+    <div class="py-5 grid place-content-center">
       <input
         v-model="search"
         class="
@@ -17,7 +17,10 @@
         placeholder="Search"
       />
     </div>
-    <transition-group name="fade" class="space-y-6">
+    <transition-group
+      name="fade"
+      class="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3"
+    >
       <div
         v-for="client in filteredClients"
         :key="client.email"
