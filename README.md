@@ -1,5 +1,13 @@
 # dept-fe
 
+## testing it out
+
+Do following to test it out
+
+- npm i
+- npm run dev
+- go to http://localhost:3000/
+
 ## Build Setup
 
 ```bash
